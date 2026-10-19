@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f1ea">
+<title>Бутон. Цветочная мастерская</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Alegreya:ital,wght@1,500;1,700&display=swap">
+<style>
+:root{--bg:#f5f1ea;--ink:#16241c;--muted:#5d6b62;--acc:#d9553b;--sage:#dfe7d8;--fill:#ebe5da;--line:#16241c1f;--hf:'Onest','Segoe UI',Tahoma,sans-serif;--sf:'Alegreya',Georgia,serif;--hh:60px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 64px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--hf);overflow-x:hidden;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+h1,h2,h3,p,ol,ul{margin:0;padding:0}
+h1,h2,h3{font-weight:700;line-height:1.02;letter-spacing:-.03em}
+em{font-family:var(--sf);font-weight:500;letter-spacing:-.01em;color:var(--acc)}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:44px 0}
+h2{font-size:clamp(36px,9.5vw,64px);margin-bottom:24px}
+.sub{color:var(--muted);margin:-8px 0 24px;max-width:44ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 28px;background:var(--ink);color:var(--bg);border:0;border-radius:999px;font-weight:600;font-size:16px;cursor:pointer;text-decoration:none;transition:transform .15s,background .2s}
+.btn:hover{background:#0c1812}.btn:active{transform:scale(.97)}
+.btn.lt{background:var(--bg);color:var(--ink)}
+.lnk{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0;background:none;border:0;color:var(--ink);font-weight:600;text-decoration:none;cursor:pointer}
+.lnk svg,.occ svg{width:16px;height:16px;transition:transform .2s}
+.lnk:hover svg{transform:translateX(3px)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.fx{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fx.in{opacity:1;transform:none}
+
+.hd{position:sticky;top:0;z-index:40;height:var(--hh);background:#f5f1eaeb;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding-top:env(safe-area-inset-top)}
+.hdi{display:flex;align-items:center;gap:16px;height:100%}
+.logo{font:700 24px var(--hf);letter-spacing:-.04em;color:var(--ink);text-decoration:none}
+.logo span{color:var(--acc)}
+.nv{display:none;gap:28px;margin-left:34px}
+.nv a{color:var(--ink);text-decoration:none;font-weight:500}
+.nv a:hover{color:var(--acc)}
+.tel{display:none;margin-left:auto;font-weight:600;color:var(--ink);text-decoration:none}
+.hd .btn{margin-left:auto;min-height:42px;padding:0 20px;font-size:15px}
+
+.hero{padding:18px 0 40px}
+.hero .wrap{display:grid;gap:30px}
+.hero h1{font-size:clamp(50px,15vw,112px)}
+.hero p{margin:20px 0 26px;max-width:38ch;font-size:19px;color:var(--muted)}
+.acts{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.facts{margin-top:28px;font-size:14px;color:var(--muted)}
+.hart{position:relative;width:100%;max-width:400px;margin-left:auto;padding-bottom:44px}
+.arch{border-radius:999px 999px 22px 22px;aspect-ratio:4/5;overflow:hidden}
+.arch svg,.arch img,.pic svg,.pic img{display:block;width:100%;height:100%}
+.arch img,.pic img{object-fit:cover}
+.hart .arch:first-child{width:76%;margin-left:auto}
+.hart .sm{position:absolute;left:0;bottom:0;width:42%;border:6px solid var(--bg)}
+
+.mq{overflow:hidden;background:var(--ink);color:var(--bg);padding:15px 0;white-space:nowrap}
+.mqt{display:inline-flex;animation:mq 40s linear infinite}
+.mqt span{font-weight:600;padding-right:44px;display:inline-flex;align-items:center;gap:44px}
+.mqt span:after{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.filters{position:sticky;top:var(--hh);z-index:30;background:var(--bg);margin:0 -20px 18px;padding:10px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+.cf{flex:none;min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line);background:transparent;font:600 15px var(--hf);cursor:pointer;transition:background .2s,color .2s}
+.cf.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.cat{display:grid;grid-template-columns:1fr 1fr;gap:26px 12px}
+.pic{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5}
+.pic svg{transition:transform .5s}
+.bq:hover .pic svg{transform:scale(1.05)}
+.tg{position:absolute;top:10px;left:10px;background:var(--acc);color:#fff;font:700 11px var(--hf);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.pp{position:absolute;left:10px;bottom:10px;background:var(--bg);padding:7px 13px;border-radius:999px;font-weight:700;font-size:15px}
+.add{position:absolute;right:10px;bottom:10px;width:46px;height:46px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);display:grid;place-items:center;cursor:pointer;transition:transform .25s}
+.add svg{width:18px;height:18px}
+.add:hover{transform:rotate(90deg)}
+.bq h3{font-size:20px;font-weight:600;letter-spacing:-.02em;margin:12px 0 2px}
+.bq p{font-size:14px;color:var(--muted);line-height:1.35}
+
+.note{display:grid;gap:18px}
+.note q{display:block;quotes:none;font:500 clamp(24px,6vw,38px)/1.22 var(--hf);letter-spacing:-.025em}
+.who{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.who i{font:700 18px var(--hf);font-style:normal;width:44px;height:44px;border-radius:50%;background:var(--sage);color:var(--ink);display:grid;place-items:center}
+
+.steps{list-style:none;counter-reset:s}
+.steps li{display:flex;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);counter-increment:s;font-size:18px}
+.steps li:before{content:counter(s);flex:none;width:44px;height:44px;border-radius:50%;background:var(--sage);display:grid;place-items:center;font-weight:700}
+.plus{margin-top:14px;color:var(--muted)}
+
+.occ{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:68px;padding:0;background:none;border:0;border-bottom:1px solid var(--line);font:600 clamp(24px,6vw,34px) var(--hf);letter-spacing:-.02em;cursor:pointer;text-align:left}
+.occ i{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;transition:background .2s,color .2s}
+.occ:hover i{background:var(--ink);color:var(--bg)}
+
+.mrow{padding:18px 0;border-bottom:1px solid var(--line)}
+.mrow .top{display:flex;align-items:baseline;gap:10px}
+.mrow h3{font-size:26px;font-weight:600;min-width:0}
+.dots{flex:1;min-width:16px;border-bottom:2px dotted var(--line);transform:translateY(-5px)}
+.mrow b{flex:none;white-space:nowrap;font-size:20px;font-weight:700}
+.mrow p{color:var(--muted);margin:2px 0 4px}
+.mrow em{display:inline-block;white-space:nowrap;background:var(--acc);color:#fff;font:600 12px/1.4 var(--hf);font-style:normal;padding:3px 10px;border-radius:999px;margin-bottom:8px;letter-spacing:0}
+
+.snap{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.snap::-webkit-scrollbar{display:none}
+.rv{flex:none;width:84%;max-width:360px;scroll-snap-align:start;background:var(--sage);border-radius:22px;padding:24px}
+.rv p{font:500 19px/1.4 var(--hf);letter-spacing:-.01em;margin-bottom:14px}
+.rv span{font-weight:600;font-size:15px}
+
+.ct{display:grid;gap:20px}
+.ct small{display:block;color:var(--muted);font-size:14px;margin-bottom:2px}
+.ct a,.ct b{font:600 26px/1.15 var(--hf);letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.cta{background:var(--ink);color:var(--bg);border-radius:28px;padding:36px 24px;margin:22px 0 28px}
+.cta h2{margin-bottom:22px}
+.ft{padding:6px 0 10px;color:var(--muted);font-size:14px}
+
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:#16241cf5;box-shadow:0 14px 34px -10px #0007}
+.bar .btn{flex:1}
+.call{flex:none;width:52px;height:52px;border-radius:50%;border:1.5px solid #f5f1ea55;color:var(--bg);display:grid;place-items:center}
+.call svg{width:22px;height:22px}
+
+.mdl{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end;justify-content:center;background:#0c181199}
+.box{position:relative;width:100%;max-width:480px;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain;background:var(--bg);border-radius:26px 26px 0 0;padding:26px 20px calc(22px + env(safe-area-inset-bottom));animation:sheet .3s cubic-bezier(.2,.8,.2,1)}
+.box:before{content:"";display:block;width:40px;height:5px;border-radius:9px;background:var(--line);margin:-12px auto 16px}
+@keyframes sheet{from{transform:translateY(50%);opacity:0}}
+.box h2{font-size:34px;margin-bottom:6px}
+.mp{color:var(--muted);margin-bottom:16px}
+form{display:grid;gap:14px}
+label{font-size:14px;font-weight:600;color:var(--muted)}
+input,select,textarea{display:block;width:100%;min-height:50px;margin-top:6px;padding:12px 14px;border:0;border-radius:14px;background:var(--fill);font-size:17px;font-weight:400;color:var(--ink)}
+textarea{min-height:64px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:#b3261e;font-size:15px;min-height:1.2em}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:50%;background:var(--fill);font-size:24px;line-height:1;color:var(--ink);cursor:pointer}
+.ok{width:64px;height:64px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:30px;margin-bottom:14px}
+
+@media (min-width:780px){
+  body{padding-bottom:0}
+  section{padding:76px 0}
+  .nv,.tel{display:flex}
+  .hd .btn{margin-left:22px}
+  .bar{display:none}
+  .hero{padding:48px 0 64px}
+  .hero .wrap{grid-template-columns:1.15fr .85fr;align-items:center;gap:60px}
+  .cat{grid-template-columns:repeat(4,1fr);gap:34px 18px}
+  .filters{margin:0 0 24px;padding:10px 0}
+  .note{grid-template-columns:.45fr 1fr;gap:50px}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  .snap{overflow:visible;margin:0;padding:0;gap:18px}
+  .rv{flex:1;width:auto;max-width:none}
+  .ct{grid-template-columns:repeat(3,1fr)}
+  .cta{padding:60px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+  .cta h2{margin:0;max-width:14ch}
+  .mdl{align-items:center}
+  .box{border-radius:26px;padding:34px 30px}
+  .box:before{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.fx{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd"><div class="wrap hdi">
+  <a class="logo" href="#top">бутон<span>.</span></a>
+  <nav class="nv"><a href="#catalog">Букеты</a><a href="#how">Как заказать</a><a href="#sub">Подписка</a><a href="#reviews">Отзывы</a><a href="#contacts">Контакты</a></nav>
+  <a class="tel" href="tel:+79007778899">+7 (900) 777-88-99</a>
+  <button class="btn" data-order>Заказать</button>
+</div></header>
+
+<main id="top">
+  <div class="hero"><div class="wrap">
+    <div>
+      <h1>Букеты, собранные <em>сегодня</em> утром</h1>
+      <p>Небольшая цветочная мастерская на Цветочной, 12. Цветы привозим каждое утро, собираем руками и довозим по городу за два часа.</p>
+      <div class="acts"><a class="btn" href="#catalog">Выбрать букет</a><a class="lnk" href="tel:+79007778899">Позвонить</a></div>
+      <div class="facts">Работаем с 2016 года. Больше 500 букетов в месяц. Оценка 4,9 на картах.</div>
+    </div>
+    <div class="hart"><div class="arch" id="harch" style="background:#f1d6d8"></div><div class="arch sm" id="harch2" style="background:#e1e9d3"></div>
+    </div>
+  </div></div>
+
+  <div class="mq" aria-hidden="true"><div class="mqt" id="mqt"></div></div>
+
+  <div class="wrap">
+    <section id="catalog">
+      <h2>Букеты <em>на сегодня</em></h2>
+      <p class="sub">Нужного нет? Соберём по вашему описанию и бюджету.</p>
+      <div class="filters" id="filters" role="tablist" aria-label="Категории"></div>
+      <div class="cat" id="cat"></div>
+    </section>
+
+    <section class="note">
+      <h2 style="margin:0">Слово <em>флориста</em></h2>
+      <div><q>Мы небольшая мастерская, и каждый букет от начала до конца собирает один флорист. Перед отправкой пришлём вам фото. Не понравится, переделаем.</q><div class="who"><i>И</i><span>Ирина, старший флорист</span></div></div>
+    </section>
+
+    <section id="how">
+      <div class="twocol"><div><h2>Как <em>заказать</em></h2><p class="plus">Открытка и упаковка бесплатно. Доставка по городу с 9:00 до 21:00.</p></div>
+      <ol class="steps" id="steps"></ol></div>
+    </section>
+
+    <section>
+      <h2>Под ваш <em>повод</em></h2>
+      <p class="sub">Расскажите, для кого цветы. Флорист предложит вариант в вашем бюджете.</p>
+      <div id="occ"></div>
+    </section>
+
+    <section id="sub"><h2>Цветы <em>по подписке</em></h2><div id="plans"></div></section>
+
+    <section id="reviews"><h2>Что пишут <em>покупатели</em></h2><div class="snap" id="rvs"></div></section>
+
+    <section id="contacts"><h2>Где нас <em>найти</em></h2>
+      <div class="ct"><div><small>Адрес</small><b>ул. Цветочная, 12</b></div><div><small>Телефон</small><a href="tel:+79007778899">+7 (900) 777-88-99</a></div><div><small>Работаем</small><b>Ежедневно 9:00–21:00</b></div></div>
+    </section>
+    <div class="cta"><h2>Закажите <em>сегодня</em>, привезём к вечеру</h2><button class="btn lt" data-order>Заказать букет</button></div>
+    <div class="ft">© 2026 Бутон</div>
+  </div>
+</main>
+
+<div class="bar"><a class="call" href="tel:+79007778899" aria-label="Позвонить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></a><button class="btn lt" data-order>Заказать букет</button></div>
+
+<div class="mdl" id="mdl" hidden role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="box"><button class="x" id="mx" type="button" aria-label="Закрыть">×</button><div id="mb"></div></div>
+</div>
+
+<script>
+/* ===== ДАННЫЕ: здесь меняются цены, названия и тексты ===== */
+// Букет: [название, описание, цена, категория, метка, цвет арки, состав рисунка, фото]
+// Состав: [тип, цвет, сколько]. Типы: peony, rose, tulip, cham (ромашка), mimosa.
+// Фото: вставьте ссылку или data:image в последнее поле, и рисунок заменится фотографией.
+const B = [
+  ["Нежность", "Розовые пионы с эвкалиптом", "4 900 ₽", "Пионы", "хит", "#f1d6d8", [["peony", "#eaa3b8", 5]], ""],
+  ["Весенний микс", "Ромашки, тюльпаны и зелень", "2 800 ₽", "Авторские", "", "#e1e9d3", [["cham", "#fff", 4], ["tulip", "#e98aa3", 3]], ""],
+  ["Красные розы", "Пятнадцать роз, 50 см", "5 900 ₽", "Розы", "хит", "#ecd3cc", [["rose", "#b3243b", 7]], ""],
+  ["Тюльпаны в коробке", "Двадцать пять тюльпанов", "4 200 ₽", "Тюльпаны", "", "#f1dfcf", [["tulip", "#dd5f7c", 7]], ""],
+  ["Белые пионы", "Семь пионов в крафте", "5 400 ₽", "Пионы", "новинка", "#dde5da", [["peony", "#fbf3ee", 5]], ""],
+  ["Кремовые розы", "Одиннадцать кустовых роз", "3 900 ₽", "Розы", "", "#e9ddd0", [["rose", "#ecd9b6", 7]], ""],
+  ["Солнечное утро", "Жёлтые тюльпаны и мимоза", "3 200 ₽", "Тюльпаны", "новинка", "#efe6c6", [["tulip", "#f2c230", 5], ["mimosa", "#f6d44d", 3]], ""],
+  ["Букет флориста", "Состав под ваш бюджет", "от 3 000 ₽", "Авторские", "", "#e8d6df", [["peony", "#f08a73", 2], ["rose", "#c0707e", 3], ["cham", "#fff", 2]], ""]
+];
+const CATS = ["Все", "Розы", "Пионы", "Тюльпаны", "Авторские"];
+const STEPS = ["Выбираете букет или описываете повод", "Флорист собирает и присылает фото", "Вы подтверждаете адрес и время", "Курьер звонит за 15 минут и привозит"];
+const OCC = ["День рождения", "Свадьба", "8 Марта", "Просто так"];
+const PLANS = [["Раз в месяц", "Авторский букет от флориста", "2 900 ₽", ""], ["Раз в неделю", "Свежий букет домой или в офис", "2 500 ₽", "чаще всего берут"], ["Для офиса", "Композиция на ресепшен каждую неделю", "от 4 000 ₽", ""]];
+const REVIEWS = [["Анна Г.", "Пионы пришли свежими и красиво упакованными. Мама была в восторге."], ["Роман Б.", "Прислали фото до отправки, всё совпало. Заказываю только здесь."], ["Мария Л.", "Заказала на юбилей мамы, привезли ровно в назначенный час."]];
+const SLOTS = ["9:00–12:00", "12:00–15:00", "15:00–18:00", "18:00–21:00", "Как можно скорее"];
+
+/* ===== РИСУНКИ БУКЕТОВ (SVG, рисуются кодом) ===== */
+const G = ["#4f7a5c", "#3f6a4d", "#6c9677"];
+const E = (x, y, rx, ry, rot, cx, cy, f) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(${rot} ${cx} ${cy})" fill="${f}" stroke="#0002" stroke-width=".8"/>`;
+function head(t, c, x, y, r, R) {
+  let o = "";
+  if (t === "peony") { for (let i = 0; i < 9; i++) o += E(x, y - r * .42, r * .52, r * .6, i * 40, x, y, c); for (let i = 0; i < 6; i++) o += E(x, y - r * .24, r * .32, r * .4, i * 60 + 20, x, y, c); o += `<circle cx="${x}" cy="${y}" r="${r * .2}" fill="#0002"/>`; }
+  else if (t === "rose") { o += `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="#0003" stroke-width=".9"/>`; [.78, .56, .34].forEach(k => o += `<circle cx="${x}" cy="${y}" r="${r * k}" fill="#000" fill-opacity=".09" stroke="#0003" stroke-width=".9"/>`); o += `<path d="M${x - r * .25} ${y}Q${x} ${y - r * .3} ${x + r * .25} ${y}" fill="none" stroke="#0004" stroke-width=".9"/>`; }
+  else if (t === "tulip") { const by = y + r * .8; o += E(x, y, r * .5, r * .95, -24, x, by, c) + E(x, y, r * .5, r * .95, 24, x, by, c) + E(x, y - r * .05, r * .48, r * .95, 0, x, by, c); }
+  else if (t === "cham") { for (let i = 0; i < 10; i++) o += E(x, y - r * .55, r * .18, r * .5, i * 36, x, y, "#fffdf8"); o += `<circle cx="${x}" cy="${y}" r="${r * .3}" fill="#f2c230"/>`; }
+  else { for (let i = 0; i < 9; i++) o += `<circle cx="${x + (R() - .5) * r * 1.8}" cy="${y + (R() - .5) * r * 1.8}" r="3.4" fill="${c}"/>`; }
+  return o;
+}
+function art(spec, seed, label) {
+  let s = seed * 97 + 11; const R = () => (s = s * 16807 % 2147483647) / 2147483647;
+  const q = (u, a, b, c) => (1 - u) * (1 - u) * a + 2 * (1 - u) * u * b + u * u * c;
+  let gr = "", st = "", hd = "";
+  for (let g = 0; g < 5; g++) {
+    const a = (-45 + g * 22 + (R() - .5) * 10) * Math.PI / 180, L = 85 + R() * 50, x = 100 + Math.sin(a) * L, y = 190 - Math.cos(a) * L, mx = 100 + Math.sin(a) * L * .45, my = 200 - Math.cos(a) * L * .5;
+    gr += `<path d="M100 200Q${mx} ${my} ${x} ${y}" stroke="#4f7a5c" stroke-width="2" fill="none"/>`;
+    for (let k = 2; k <= 6; k++) { const u = k / 6, px = q(u, 100, mx, x), py = q(u, 200, my, y), sd = k % 2 ? 1 : -1; gr += `<ellipse cx="${px + sd * 5}" cy="${py}" rx="5.5" ry="7.5" transform="rotate(${sd * 35} ${px} ${py})" fill="${G[k % 3]}"/>`; }
+  }
+  const hs = []; spec.forEach(([t, c, n]) => { for (let i = 0; i < n; i++) hs.push([t, c]); });
+  for (let i = hs.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [hs[i], hs[j]] = [hs[j], hs[i]]; }
+  hs.forEach(([t, c], i) => {
+    const a = (-38 + 76 * (i / (hs.length - 1 || 1)) + (R() - .5) * 6) * Math.PI / 180, L = 70 + R() * 40, x = 100 + Math.sin(a) * L, y = 192 - Math.cos(a) * L;
+    st += `<path d="M100 200Q${100 + Math.sin(a) * L * .4} ${200 - Math.cos(a) * L * .5} ${x} ${y}" stroke="${G[i % 3]}" stroke-width="2.6" fill="none"/>`;
+    hd += head(t, c, x, y, t === "tulip" ? 15 : t === "cham" ? 12 : 17 - R() * 2, R);
+  });
+  const cone = `<path d="M46 165L154 165L110 248L90 248Z" fill="#d8c19b"/><path d="M46 165L100 205L154 165L154 173L100 214L46 173Z" fill="#c8ab80"/><rect x="87" y="223" width="26" height="7" fill="#a8453a"/>`;
+  return `<svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMax meet" role="img" aria-label="${label}">${gr}${st}${hd}${cone}</svg>`;
+}
+const pic = (b, k) => b[7] ? `<img src="${b[7]}" alt="${b[0]}" loading="lazy">` : art(b[6], k + 1, b[0]);
+
+/* ===== СБОРКА СТРАНИЦЫ ===== */
+const $ = id => document.getElementById(id);
+const ARW = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg>`;
+const PLUS = `<svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3v12M3 9h12"/></svg>`;
+$("mqt").innerHTML = ["Свежие цветы каждое утро", "Доставка за 2 часа", "Фото до отправки", "Открытка бесплатно"].map(t => `<span>${t}</span>`).join("").repeat(6);
+$("harch").innerHTML = art(B[0][6], 1, "Букет из розовых пионов");
+$("harch2").innerHTML = art(B[1][6], 2, "Весенний букет");
+$("filters").innerHTML = CATS.map((c, k) => `<button class="cf${k ? "" : " on"}" data-cat="${c}" role="tab">${c}</button>`).join("");
+$("cat").innerHTML = B.map((b, k) => `<article class="bq" data-cat="${b[3]}"><div class="pic" style="background:${b[5]}">${pic(b, k)}${b[4] ? `<span class="tg">${b[4]}</span>` : ""}<span class="pp">${b[2]}</span><button class="add" data-pick="${k}" aria-label="Заказать ${b[0]}">${PLUS}</button></div><h3>${b[0]}</h3><p>${b[1]}</p></article>`).join("");
+$("steps").innerHTML = STEPS.map(s => `<li>${s}</li>`).join("");
+$("occ").innerHTML = OCC.map(o => `<button class="occ" data-occ="${o}">${o}<i>${ARW}</i></button>`).join("");
+$("plans").innerHTML = PLANS.map(p => `<div class="mrow">${p[3] ? `<em>${p[3]}</em>` : ""}<div class="top"><h3>${p[0]}</h3><span class="dots"></span><b>${p[2]}</b></div><p>${p[1]}</p><button class="lnk" data-plan="${p[0]}">Оформить ${ARW}</button></div>`).join("");
+$("rvs").innerHTML = REVIEWS.map(r => `<article class="rv"><p>«${r[1]}»</p><span>${r[0]}</span></article>`).join("");
+
+// Плавное появление блоков при прокрутке
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .08 });
+document.querySelectorAll(".bq,.steps li,.mrow,.occ,.rv,section h2,.cta,.who").forEach(el => { el.classList.add("fx"); io.observe(el); });
+$("filters").onclick = e => {
+  const c = e.target.closest(".cf"); if (!c) return;
+  document.querySelectorAll(".cf").forEach(x => x.classList.toggle("on", x === c));
+  document.querySelectorAll(".bq").forEach(a => a.hidden = c.dataset.cat !== "Все" && a.dataset.cat !== c.dataset.cat);
+  c.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+};
+
+/* ===== ОКНО ЗАКАЗА ===== */
+const mdl = $("mdl"), mb = $("mb");
+const closeBook = () => { mdl.hidden = true; document.body.style.overflow = ""; };
+function openBook(opt) {
+  opt = opt || {};
+  const today = new Date().toISOString().slice(0, 10);
+  mb.innerHTML = `<h2 id="mt">Заказать букет</h2><p class="mp">Оставьте контакты. Флорист перезвонит в течение 15 минут и пришлёт фото.</p>
+  <form id="mf" novalidate>
+    <label>Букет<select name="b">${B.map(b => `<option>${b[0]}, ${b[2]}</option>`).join("")}</select></label>
+    <div class="two"><label>Дата<input name="d" type="date" min="${today}" value="${today}"></label>
+    <label>Время<select name="t">${SLOTS.map(s => `<option>${s}</option>`).join("")}</select></label></div>
+    <label>Адрес доставки<input name="a" autocomplete="street-address" placeholder="Улица, дом, квартира"></label>
+    <label>Имя<input name="n" autocomplete="name"></label>
+    <label>Телефон<input name="p" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></label>
+    <label>Текст открытки<textarea name="c" rows="2" placeholder="Необязательно"></textarea></label>
+    <span class="err" id="me" role="alert"></span>
+    <button class="btn" type="submit">Отправить заказ</button>
+  </form>`;
+  const f = $("mf");
+  if (opt.pick != null) f.elements.b.selectedIndex = opt.pick;
+  if (opt.note) f.elements.c.value = opt.note;
+  f.elements.p.oninput = e => {
+    let d = e.target.value.replace(/\D/g, ""); if (d[0] === "8") d = "7" + d.slice(1); if (d && d[0] !== "7") d = "7" + d; d = d.slice(0, 11);
+    let o = ""; if (d) { o = "+7"; if (d.length > 1) o += " (" + d.slice(1, 4); if (d.length > 4) o += ") " + d.slice(4, 7); if (d.length > 7) o += "-" + d.slice(7, 9); if (d.length > 9) o += "-" + d.slice(9, 11); }
+    e.target.value = o;
+  };
+  f.onsubmit = e => {
+    e.preventDefault();
+    const d = new FormData(f), err = $("me"), name = d.get("n").trim(), phone = d.get("p").trim();
+    if (d.get("a").trim().length < 5) { err.textContent = "Укажите адрес доставки"; return; }
+    if (!name) { err.textContent = "Укажите имя"; return; }
+    if (phone.replace(/\D/g, "").length < 11) { err.textContent = "Укажите телефон полностью"; return; }
+    // ТУТ ПОДКЛЮЧИТЕ ОТПРАВКУ ЗАКАЗА: Telegram-бот, почта или CRM. Данные: d.get("b"), d.get("d"), d.get("t"), d.get("a"), name, phone, d.get("c")
+    mb.innerHTML = `<div class="ok">✓</div><h2>Заказ принят</h2><p class="mp" id="thx"></p><button class="btn" id="mc" type="button">Закрыть</button>`;
+    $("thx").textContent = `${name}, перезвоним на ${phone} в течение 15 минут.`;
+    $("mc").onclick = closeBook;
+  };
+  mdl.hidden = false; document.body.style.overflow = "hidden";
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-order],[data-pick],[data-plan],[data-occ]"); if (!t) return;
+  if (t.dataset.pick != null) openBook({ pick: +t.dataset.pick });
+  else if (t.dataset.plan) openBook({ pick: B.length - 1, note: "Подписка: " + t.dataset.plan });
+  else if (t.dataset.occ) openBook({ pick: B.length - 1, note: "Повод: " + t.dataset.occ });
+  else openBook();
+});
+$("mx").onclick = closeBook;
+mdl.onclick = e => { if (e.target === mdl) closeBook(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !mdl.hidden) closeBook(); });
+</script>
+</body>
+</html>
